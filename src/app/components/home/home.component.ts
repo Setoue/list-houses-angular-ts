@@ -21,8 +21,14 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {}
 
   getListHousing(): void {
-    this.housingService.getHousing().subscribe((data) => {
-      this.housingLocation = data;
-    });
+    this.housingService.getHousing().subscribe(
+      (data) => {
+        this.housingLocation = data;
+      },
+      (error) => {
+        console.log(`Deu ruim ${error}`);
+      },
+      () => {}
+    );
   }
 }
