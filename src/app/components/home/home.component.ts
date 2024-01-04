@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HousingLocationComponent } from '../housing-location/housing-location.component';
 import { HousingLocation } from '../../housinglocation';
-import { ProductService } from '../../service/product.service';
+import { HousingService } from '../../service/housing.service';
 
 @Component({
   selector: 'app-home',
@@ -12,23 +12,28 @@ import { ProductService } from '../../service/product.service';
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
-  housingLocation: HousingLocation[] = [];
-
-  constructor(private housingService: ProductService) {
-    this.getListHousing();
-  }
+  housingService: HousingService = inject(HousingService);
 
   ngOnInit(): void {}
-
-  getListHousing(): void {
-    this.housingService.getHousing().subscribe(
-      (data) => {
-        this.housingLocation = data;
-      },
-      (error) => {
-        console.log(`Deu ruim ${error}`);
-      },
-      () => {}
-    );
+  constructor() {
+    this.housingService.getListHousing();
   }
+
+  // public getListHousing(): void {
+  //   this.housingService.getHousing().subscribe(
+  //     (data) => {
+  //       this.housingLocation = data;
+  //     },
+  //     (error) => {
+  //       console.log(`Deu ruim ${error}`);
+  //     },
+  //     () => {}
+  //   );
+  // }
+
+  // public getHousingById(id: number): HousingLocation | undefined {
+  //   return this.housingLocation.find(
+  //     (housingLocation) => housingLocation.id === id
+  //   );
+  // }
 }
