@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HousingLocation } from '../housinglocation';
+import { HousingLocation } from '../types/housinglocation';
 
 @Injectable({
   providedIn: 'root',
@@ -21,15 +21,15 @@ export class HousingService {
   }
 
   public getListHousing(): void {
-    this.getHousing().subscribe(
-      (data) => {
+    this.getHousing().subscribe({
+      next: (data) => {
         this.housingLocation = data;
       },
-      (error) => {
-        console.log(`Deu ruim ${error}`);
+      error: (erro) => {
+        alert('Deu ruim na requisição');
+        console.log(`Deu ruim ${erro}`);
       },
-      () => {}
-    );
+    });
   }
 
   public getHousingById(id: number): HousingLocation | undefined {

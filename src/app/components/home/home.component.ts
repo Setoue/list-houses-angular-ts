@@ -1,7 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HousingLocationComponent } from '../housing-location/housing-location.component';
-import { HousingLocation } from '../../housinglocation';
 import { HousingService } from '../../service/housing.service';
 
 @Component({
@@ -17,23 +16,6 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {}
   constructor() {
     this.housingService.getListHousing();
+    // this.housingService.getHousingById();
   }
-
-  // public getListHousing(): void {
-  //   this.housingService.getHousing().subscribe(
-  //     (data) => {
-  //       this.housingLocation = data;
-  //     },
-  //     (error) => {
-  //       console.log(`Deu ruim ${error}`);
-  //     },
-  //     () => {}
-  //   );
-  // }
-
-  // public getHousingById(id: number): HousingLocation | undefined {
-  //   return this.housingLocation.find(
-  //     (housingLocation) => housingLocation.id === id
-  //   );
-  // }
 }
