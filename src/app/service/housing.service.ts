@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { HousingLocation } from '../types/housinglocation';
 
 @Injectable({
@@ -13,11 +13,12 @@ export class HousingService {
 
   constructor(private http: HttpClient) {}
 
-  public getHousing(): Observable<HousingLocation[]> {
-    const response = this.http.get<HousingLocation[]>(
+ public getHousing(): Observable<HousingLocation[]> {
+    return this.http.get<HousingLocation[]>(
       `${this.SERVER_URL}/housingLocationData`
+    ).pipe(
+      tap((data) => (this.housingLocation = data))
     );
-    return response;
   }
 
   public getListHousing(): void {
@@ -26,8 +27,7 @@ export class HousingService {
         this.housingLocation = data;
       },
       error: (erro) => {
-        alert('Deu ruim na requisição');
-        console.log(`Deu ruim ${erro}`);
+        alert(`Request failed - ${erro}`);
       },
     });
   }
@@ -37,4 +37,10 @@ export class HousingService {
       (housingLocation) => housingLocation.id === id
     );
   }
+
+  public getHousingByCity(name: string): HousingLocation[] {
+    return this.housingLocation.filter(
+      (house) => house.city.toLowerCase().includes(name.toLocaleLowerCase())
+  );
+}
 }
