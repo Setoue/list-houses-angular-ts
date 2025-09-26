@@ -1,27 +1,99 @@
-# FirstApp
+# 🏡 List Houses Angular (Angular + JSON Server)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.0.
+Este projeto é uma aplicação **Angular** que exibe uma listagem de casas com opção de filtro.  
+Os dados são consumidos via **JSON Server** em `http://localhost:3000/housingLocationData`.
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## 🚀 Tecnologias Utilizadas
 
-## Code scaffolding
+- [Angular 17+](https://angular.io/) - Framework frontend
+- [TypeScript](https://www.typescriptlang.org/) - Linguagem principal
+- [JSON Server](https://github.com/typicode/json-server) - Mock de API para simulação de dados
+- [RxJS](https://rxjs.dev/) - Manipulação reativa de dados
+- [Sass/CSS] - Estilização dos componentes
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+---
 
-## Build
+## 📦 Estrutura de Pastas
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```
+src/app
+ ├── components/              # Componentes reaproveitáveis
+ │   ├── form/                # Formulário de filtros
+ │   │   ├── form.component.css
+ │   │   ├── form.component.html
+ │   │   ├── form.component.spec.ts
+ │   │   └── form.component.ts
+ │   └── housing-location/    # Card de exibição de casas
+ │       ├── housing-location.component.css
+ │       ├── housing-location.component.html
+ │       └── housing-location.component.ts
+ │
+ ├── pages/                   # Páginas principais
+ │   ├── details/             # Página de detalhes da casa
+ │   │   ├── details.component.css
+ │   │   ├── details.component.html
+ │   │   └── details.component.ts
+ │   └── home/                # Página inicial com listagem e filtro
+ │       ├── home.component.css
+ │       ├── home.component.html
+ │       └── home.component.ts
+ │
+ ├── service/                 # Serviços de consumo da API
+ │   ├── housing.service.ts
+ │   └── product.service.ts
+ │
+ ├── types/                   # Tipagens e interfaces
+ │   └── housinglocation.ts
+ │
+ ├── app.component.*          # Componente raiz
+ ├── app.config.*             # Configurações globais
+ └── app.routes.ts            # Definição de rotas
+```
 
-## Running unit tests
+---
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## ⚙️ Como Rodar o Projeto
 
-## Running end-to-end tests
+### 1. Clone o repositório
+```bash
+git clone https://github.com/seu-usuario/list-houses-angular-ts.git
+cd list-houses-angular-ts
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### 2. Instale as dependências
+```bash
+npm install
+```
 
-## Further help
+### 3. Suba o JSON Server
+Na pasta `data/` existe o arquivo `db.json` (ou equivalente) com os dados de mock.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```bash
+npx json-server --watch data/db.json --port 3000
+```
+
+A API estará disponível em:  
+👉 `http://localhost:3000/housingLocationData`
+
+### 4. Rode a aplicação Angular
+```bash
+ng serve
+```
+
+Acesse no navegador:  
+👉 `http://localhost:4200/`
+
+---
+
+## 🎯 Funcionalidades
+
+- Listagem de casas disponíveis
+- Filtro dinâmico por nome/cidade/estado
+- Página de detalhes de cada casa
+- Integração com **JSON Server** simulando uma API REST
+
+---
+
+Feito com 💻 por **Shigeru**
